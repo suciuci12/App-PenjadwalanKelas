@@ -261,9 +261,9 @@
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblKelas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cbKelas" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblKelas" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -281,10 +281,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="lblJamSelesai" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtJamSelesai" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txtJamSelesai" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblJamSelesai" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="cbPelajaran" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblKelas2" alignment="3" min="-2" max="-2" attributes="0"/>
