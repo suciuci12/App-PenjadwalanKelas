@@ -63,9 +63,14 @@
                       <Component id="btnHapus" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
                   <Component id="btnReset" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="btnExportPelajaran" min="-2" pref="42" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="45" max="32767" attributes="0"/>
+=======
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+>>>>>>> a564c35b8904384bb026d921b818e98cf81b3c00
           </Group>
       </Group>
     </DimensionLayout>

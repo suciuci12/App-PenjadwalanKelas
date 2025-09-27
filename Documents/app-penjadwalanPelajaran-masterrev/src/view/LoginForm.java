@@ -74,12 +74,12 @@ public class LoginForm extends javax.swing.JFrame {
 
         lblTitle.setBackground(new java.awt.Color(153, 255, 153));
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
-        lblTitle.setText("Selamat Datang di Penjadwalan Siswa");
+        lblTitle.setText("Selamat Datang di Manajemen Penjadwalan Siswa");
         lblTitle.setName(""); // NOI18N
 
         lblTitle1.setBackground(new java.awt.Color(153, 255, 153));
         lblTitle1.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
-        lblTitle1.setText("PPLG SMK Citra Negara");
+        lblTitle1.setText("PPLG-SMK Citra Negara");
         lblTitle1.setName(""); // NOI18N
 
         lblPassword.setText("Password : ");
@@ -124,17 +124,16 @@ public class LoginForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNis))))
-                        .addGap(27, 27, 27))
+                                    .addComponent(txtNis)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblTitle1)))
-                .addGap(158, 158, 158))
+                .addGap(185, 185, 185))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(lblTitle)
-                .addGap(56, 56, 56))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,14 +148,14 @@ public class LoginForm extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
+                                .addGap(79, 79, 79)
                                 .addComponent(lblNis)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtNis, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14)))
@@ -208,28 +207,53 @@ public class LoginForm extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 //        // TODO add your handling code here:
         String nis = txtNis.getText();
-        String pass = new String(txtPassword.getPassword());
-        Connection conn = config.DatabaseConnection.getConnection();
-        
-        try{
-            String sql = "SELECT users.*, level.nama_level FROM users JOIN level ON users.id_level = level.id WHERE nis = ? AND password = ?";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, nis);
-            pst.setString(2, pass);
-            
-            ResultSet rs = pst.executeQuery();
-            
-            if (rs.next()) {
-            JOptionPane.showMessageDialog(null, "Login Berhasil");
-            new Dashboard().setVisible(true);
-            this.dispose();
+    String pass = new String(txtPassword.getPassword());
+    Connection conn = config.DatabaseConnection.getConnection();
+    
+    try {
+        String sql = """
+             SELECT u.id_level, u.nis, s.nama_siswa, k.nama_kelas, j.nama_jurusan
+                FROM users u
+                LEFT JOIN siswa s ON u.nis = s.nis
+                LEFT JOIN kelas k ON s.id_kelas = k.id
+                LEFT JOIN jurusan j ON s.id_jurusan = j.id
+                WHERE u.nis=? AND u.password=?
+            """;
+
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, nis);
+        pst.setString(2, pass);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            int idLevel = rs.getInt("id_level");
+
+            if (idLevel == 1) { // Admin
+                JOptionPane.showMessageDialog(this, "Login Berhasil sebagai Admin");
+                new Dashboard().setVisible(true);
+                this.dispose();
+
+            } else if (idLevel == 2) { // Siswa
+                JOptionPane.showMessageDialog(this, "Login Berhasil sebagai Siswa");
+
+                String nama = rs.getString("nama_siswa");
+                String kelas = rs.getString("nama_kelas");
+                String jurusan = rs.getString("nama_jurusan");
+
+                DashboardSiswa ds = new DashboardSiswa(nis, nama, kelas, jurusan);
+                ds.setVisible(true);
+                this.dispose();
+                
             } else {
-                JOptionPane.showMessageDialog(null, "NIS atau Password salah");
+                JOptionPane.showMessageDialog(this, "Level tidak dikenali!");
             }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
+
+        } else {
+            JOptionPane.showMessageDialog(this, "NIS atau Password salah!");
         }
 
+<<<<<<< HEAD
 //  String nis = txtNis.getText().trim();
 //String pass = new String(txtPassword.getPassword());
 //
@@ -290,6 +314,14 @@ public class LoginForm extends javax.swing.JFrame {
 //} catch (Exception e) {
 //    JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
 //}
+=======
+        rs.close();
+        pst.close();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
+>>>>>>> a564c35b8904384bb026d921b818e98cf81b3c00
 
     }//GEN-LAST:event_btnLoginActionPerformed
 

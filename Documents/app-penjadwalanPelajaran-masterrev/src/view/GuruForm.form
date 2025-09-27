@@ -47,7 +47,11 @@
                   <Component id="btnReset" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
                   <Component id="btnHapus" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
               </Group>
+<<<<<<< HEAD
               <EmptySpace max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="111" max="32767" attributes="0"/>
+>>>>>>> a564c35b8904384bb026d921b818e98cf81b3c00
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,7 +74,11 @@
                       <Component id="btnReset" min="-2" pref="52" max="-2" attributes="0"/>
                   </Group>
               </Group>
+<<<<<<< HEAD
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+=======
+              <EmptySpace pref="74" max="32767" attributes="0"/>
+>>>>>>> a564c35b8904384bb026d921b818e98cf81b3c00
           </Group>
       </Group>
     </DimensionLayout>
