@@ -217,40 +217,45 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="lblKelas1" min="-2" pref="67" max="-2" attributes="0"/>
-                      <Component id="lblKelas2" min="-2" pref="67" max="-2" attributes="0"/>
-                      <Component id="lblKelas" min="-2" pref="67" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cbKelas" min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="cbGuru" min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="cbPelajaran" min="-2" pref="99" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblHari" min="-2" pref="72" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cbHari" pref="101" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="lblJamSelesai" max="32767" attributes="0"/>
-                              <Component id="lblJamMulai" pref="72" max="32767" attributes="0"/>
+                      <Component id="btnExportPenjadwalanPDF" min="-2" pref="126" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lblKelas1" min="-2" pref="67" max="-2" attributes="0"/>
+                              <Component id="lblKelas2" min="-2" pref="67" max="-2" attributes="0"/>
+                              <Component id="lblKelas" min="-2" pref="67" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbKelas" min="-2" pref="99" max="-2" attributes="0"/>
+                              <Component id="cbGuru" min="-2" pref="99" max="-2" attributes="0"/>
+                              <Component id="cbPelajaran" min="-2" pref="99" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtJamMulai" pref="101" max="32767" attributes="0"/>
-                              <Component id="txtJamSelesai" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblHari" min="-2" pref="72" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="cbHari" pref="101" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="lblJamSelesai" max="32767" attributes="0"/>
+                                      <Component id="lblJamMulai" pref="72" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtJamMulai" pref="101" max="32767" attributes="0"/>
+                                      <Component id="txtJamSelesai" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnTambah" min="-2" pref="126" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="btnTambah" min="-2" pref="126" max="-2" attributes="0"/>
                   <EmptySpace min="36" pref="57" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -261,9 +266,9 @@
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblKelas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cbKelas" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblKelas" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -281,16 +286,16 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="lblJamSelesai" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtJamSelesai" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txtJamSelesai" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblJamSelesai" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="cbPelajaran" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblKelas2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="58" max="32767" attributes="0"/>
+                  <EmptySpace pref="8" max="32767" attributes="0"/>
+                  <Component id="btnExportPenjadwalanPDF" min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -390,6 +395,19 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambahActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnExportPenjadwalanPDF">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Export to PDF"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportPenjadwalanPDFActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

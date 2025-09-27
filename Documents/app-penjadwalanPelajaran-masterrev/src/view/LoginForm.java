@@ -160,7 +160,7 @@ public class LoginForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtNis, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPassword)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -206,7 +206,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNisActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+//        // TODO add your handling code here:
         String nis = txtNis.getText();
         String pass = new String(txtPassword.getPassword());
         Connection conn = config.DatabaseConnection.getConnection();
@@ -229,6 +229,68 @@ public class LoginForm extends javax.swing.JFrame {
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
         }
+
+//  String nis = txtNis.getText().trim();
+//String pass = new String(txtPassword.getPassword());
+//
+//Connection conn = config.DatabaseConnection.getConnection();
+//
+//try {
+//    // 1️⃣ Login ke tabel users (admin/guru)
+//    String sqlUsers = "SELECT users.id, users.nis, users.password, level.nama_level " +
+//                      "FROM users " +
+//                      "JOIN level ON users.id_level = level.id " +
+//                      "WHERE users.nis = ? AND users.password = ?";
+//    PreparedStatement pstUsers = conn.prepareStatement(sqlUsers);
+//    pstUsers.setString(1, nis);
+//    pstUsers.setString(2, pass);
+//    ResultSet rsUsers = pstUsers.executeQuery();
+//
+//    if (rsUsers.next()) {
+//        String role = rsUsers.getString("nama_level");
+//        int userId = rsUsers.getInt("id");
+//        String nisUser = rsUsers.getString("nis");
+//
+//        JOptionPane.showMessageDialog(null, "Login berhasil sebagai " + role);
+//
+//        if (role.equalsIgnoreCase("admin")) {
+//            new Dashboard().setVisible(true); // dashboard admin
+//        } 
+////        else if (role.equalsIgnoreCase("guru")) {
+////            new DashboardGuru(userId, nisUser).setVisible(true); // dashboard guru
+////        }
+//
+//        this.dispose();
+//        return;
+//    }
+//
+//    // 2️⃣ Kalau tidak ditemukan di users, cek di tabel siswa
+//    String sqlSiswa = "SELECT id, nis, password, nama_siswa, id_kelas, id_jurusan " +
+//                      "FROM siswa " +
+//                      "WHERE nis = ? AND password = ?";
+//    PreparedStatement pstSiswa = conn.prepareStatement(sqlSiswa);
+//    pstSiswa.setString(1, nis);
+//    pstSiswa.setString(2, pass);
+//    ResultSet rsSiswa = pstSiswa.executeQuery();
+//
+//    if (rsSiswa.next()) {
+//        int siswaId = rsSiswa.getInt("id");
+//        String nama = rsSiswa.getString("nama_siswa");
+//        int kelasId = rsSiswa.getInt("id_kelas");
+//        int jurusanId = rsSiswa.getInt("id_jurusan");
+//
+//        JOptionPane.showMessageDialog(null, "Login berhasil sebagai Siswa");
+//
+//        new DashboardSiswa(siswaId, nama, kelasId, jurusanId).setVisible(true);
+//        this.dispose();
+//    } else {
+//        JOptionPane.showMessageDialog(null, "NIS atau Password salah!");
+//    }
+//
+//} catch (Exception e) {
+//    JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
+//}
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

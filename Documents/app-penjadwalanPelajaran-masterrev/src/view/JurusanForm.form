@@ -33,9 +33,12 @@
               <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnEdit" alignment="1" min="-2" pref="112" max="-2" attributes="0"/>
-                  <Component id="btnHapus" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
-                  <Component id="btnReset" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnEdit" alignment="1" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="btnHapus" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="btnReset" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnExportJurusanPDF" min="-2" pref="113" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -57,6 +60,8 @@
                               <Component id="btnHapus" min="-2" pref="46" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnReset" min="-2" pref="46" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnExportJurusanPDF" min="-2" pref="46" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -309,6 +314,21 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnExportJurusanPDF">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Export to PDF"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Color PropertyName="color" blue="98" green="98" red="0" type="rgb"/>
+            </LineBorder>
+          </Border>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportJurusanPDFActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

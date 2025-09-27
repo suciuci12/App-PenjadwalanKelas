@@ -48,6 +48,7 @@ public class KelasForm extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         txtNamaKelas = new javax.swing.JTextField();
         btnTambah = new javax.swing.JButton();
+        ExportToPdf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(902, 474));
@@ -170,6 +171,14 @@ public class KelasForm extends javax.swing.JFrame {
             }
         });
 
+        ExportToPdf.setText("Export To Pdf");
+        ExportToPdf.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ExportToPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportToPdfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -183,7 +192,8 @@ public class KelasForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnTambah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                    .addComponent(txtNamaKelas))
+                    .addComponent(txtNamaKelas)
+                    .addComponent(ExportToPdf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
@@ -199,6 +209,8 @@ public class KelasForm extends javax.swing.JFrame {
                     .addComponent(txtNamaKelas, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ExportToPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(265, 265, 265))
         );
 
@@ -233,11 +245,11 @@ public class KelasForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -264,6 +276,77 @@ public class KelasForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Gagal tampil data: " + e.getMessage());
         }
     }
+        private void exportKelasToPDF() {
+    try {
+        // Buka dialog simpan file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Simpan Laporan kelas");
+        fileChooser.setSelectedFile(new java.io.File("Data_kelas.pdf")); // nama default
+        int userSelection = fileChooser.showSaveDialog(null);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+            // Pastikan ekstensi .pdf
+            if (!filePath.toLowerCase().endsWith(".pdf")) {
+                filePath += ".pdf";
+            }
+
+            // Buat dokumen PDF ukuran Letter
+            com.itextpdf.text.Document document = new com.itextpdf.text.Document(com.itextpdf.text.PageSize.LETTER);
+            com.itextpdf.text.pdf.PdfWriter.getInstance(document, new java.io.FileOutputStream(filePath));
+            document.open();
+
+            // Judul
+            com.itextpdf.text.Paragraph judul = new com.itextpdf.text.Paragraph("Laporan Data kelas\n\n",
+                    new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 16, com.itextpdf.text.Font.BOLD));
+            judul.setAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+            document.add(judul);
+
+            // Buat tabel PDF (contoh: NIP, Nama, Jenis Kelamin, No HP, Alamat)
+            com.itextpdf.text.pdf.PdfPTable table = new com.itextpdf.text.pdf.PdfPTable(2);
+            table.setWidthPercentage(100);
+            
+            String[] head = {"ID"};
+            for (String h : head) {
+                com.itextpdf.text.pdf.PdfPCell cell = new com.itextpdf.text.pdf.PdfPCell(new com.itextpdf.text.Phrase(h));
+                cell.setHorizontalAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+                table.addCell(cell);
+            }
+            // Header kolom
+            String[] header = {"Nama kelas"};
+            for (String h : header) {
+                com.itextpdf.text.pdf.PdfPCell cell = new com.itextpdf.text.pdf.PdfPCell(new com.itextpdf.text.Phrase(h));
+                cell.setHorizontalAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+                table.addCell(cell);
+            }
+            
+
+            // Ambil data guru dari database
+            Connection conn = DatabaseConnection.getConnection();
+            String sql = "SELECT id, nama_kelas FROM kelas";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            // Isi data ke tabel PDF
+            while (rs.next()) {
+                table.addCell(rs.getString("id"));
+                table.addCell(rs.getString("nama_kelas"));
+                
+            }
+
+            document.add(table);
+            document.close();
+
+            JOptionPane.showMessageDialog(null, "Laporan kelas berhasil disimpan di: " + filePath);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Gagal export PDF: " + e.getMessage());
+    }
+}
+    
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
@@ -348,6 +431,10 @@ public class KelasForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void ExportToPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportToPdfActionPerformed
+exportKelasToPDF();        
+    }//GEN-LAST:event_ExportToPdfActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -374,6 +461,7 @@ public class KelasForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExportToPdf;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnReset;
