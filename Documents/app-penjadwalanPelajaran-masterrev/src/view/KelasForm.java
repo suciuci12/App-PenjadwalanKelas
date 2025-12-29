@@ -7,6 +7,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import config.DatabaseConnection;
+import view.ExportUtil;
 
 /**
  *
@@ -432,7 +433,12 @@ public class KelasForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ExportToPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportToPdfActionPerformed
-exportKelasToPDF();        
+    ExportUtil.exportTableToPDF(
+            tableKelas,
+            this,
+            "Data_Kelas.pdf",
+            "LAPORAN DATA KELAS"
+        );       
     }//GEN-LAST:event_ExportToPdfActionPerformed
 
     /**
